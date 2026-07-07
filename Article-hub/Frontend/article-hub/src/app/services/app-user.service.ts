@@ -12,13 +12,13 @@ export class AppUserService {
 
   login(data: any) {
     return this.httpClient.post(this.url + "/appUser/login", data, {
-      headers: new HttpHeaders().set('Content-Tyep', "application/json")
+      headers: new HttpHeaders().set('Content-Type', "application/json")
     })
   }
 
   addNewAppUser(data: any) {
     return this.httpClient.post(this.url + "/appUser/addNewAppuser", data, {
-      headers: new HttpHeaders().set('Content-Tyep', "application/json")
+     headers: new HttpHeaders().set('Content-Type', "application/json")
     })
   }
 
@@ -28,13 +28,13 @@ export class AppUserService {
 
   updateUser(data: any) {
     return this.httpClient.post(this.url + "/appUser/updateUser", data, {
-      headers: new HttpHeaders().set('Content-Tyep', "application/json")
+      headers: new HttpHeaders().set('Content-Type', "application/json")
     })
   }
 
   updateUserStatus(data: any) {
     return this.httpClient.post(this.url + "/appUser/updateUserStatus", data, {
-      headers: new HttpHeaders().set('Content-Tyep', "application/json")
+      headers: new HttpHeaders().set('Content-Type', "application/json")
     })
   }
 }

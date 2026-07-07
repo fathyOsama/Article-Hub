@@ -58,25 +58,43 @@ public class CategoryServiceImpl implements CategoryService {
     public ResponseEntity<?> updateCategory(Category category) {
         try {
             if(Objects.nonNull(category)
-                    && Objects.isNull(category.getId())
+                    && Objects.nonNull(category.getId())
                     && Objects.nonNull(category.getName())
                     && !category.getName().trim().isEmpty()) {
+
                 if (!categoryRepository.existsByNameIgnoreCase(category.getName())) {
-                    Integer updateCount = categoryRepository.updateCategory(category.getName(), category.getId());
+                    Integer updateCount = categoryRepository.updateCategory(
+                            category.getName(), category.getId()
+                    );
                     if (updateCount == 0) {
-                        return new ResponseEntity<>("{\"message\":\"Category id does not found.\"}", HttpStatus.NOT_FOUND);
+                        return new ResponseEntity<>(
+                                "{\"message\":\"Category id does not found.\"}",
+                                HttpStatus.NOT_FOUND
+                        );
                     } else {
-                        return new ResponseEntity<>("{\"message\":\"Category updated successfully.\"}", HttpStatus.OK);
+                        return new ResponseEntity<>(
+                                "{\"message\":\"Category updated successfully.\"}",
+                                HttpStatus.OK
+                        );
                     }
                 } else {
-                    return new ResponseEntity<>("{\"message\":\"Category with name ("+ category.getName() + " ) already exist.\"}", HttpStatus.CONFLICT);
+                    return new ResponseEntity<>(
+                            "{\"message\":\"Category with name (" + category.getName() + ") already exist.\"}",
+                            HttpStatus.CONFLICT
+                    );
                 }
             }
-            return new ResponseEntity<>("{\"message\":\"Invalid data.\"}", HttpStatus.BAD_REQUEST);
-        } catch (Exception ex){
+            return new ResponseEntity<>(
+                    "{\"message\":\"Invalid data.\"}",
+                    HttpStatus.BAD_REQUEST
+            );
+        } catch (Exception ex) {
             log.error("Exception in updateCategory : {}", ex);
         }
-        return new ResponseEntity<>("{\"message\":\"Something went wrong.\"}", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(
+                "{\"message\":\"Something went wrong.\"}",
+                HttpStatus.INTERNAL_SERVER_ERROR
+        );
     }
 
 }

@@ -38,6 +38,7 @@ export class CategoryComponent implements OnInit{
       this.dialogAction = "Edit";
       this.action = "Update";
       this.categoryForm.patchValue(this.dialogData.data);
+      this.categoryForm.markAsDirty();
     }
   }
 

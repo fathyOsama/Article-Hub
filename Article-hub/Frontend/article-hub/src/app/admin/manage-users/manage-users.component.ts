@@ -27,7 +27,7 @@ export class ManageUsersComponent implements OnInit {
     private router: Router,
     private appuserService: AppUserService,
     public themeService: ThemeService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.ngxService.start();
@@ -90,7 +90,7 @@ export class ManageUsersComponent implements OnInit {
     this.ngxService.start();
     var data = {
       id: id,
-      status: status.toString(),
+      status: status ? 'ACTIVE' : 'INACTIVE',   // ✅ matches what backend stores
     };
     this.appuserService.updateUserStatus(data).subscribe(
       (response: any) => {
@@ -101,12 +101,7 @@ export class ManageUsersComponent implements OnInit {
       },
       (error) => {
         this.ngxService.stop();
-        console.log(error);
-        if (error.error?.message) {
-          this.responseMessage = error.error?.message;
-        } else {
-          this.responseMessage = GlobalConstants.genericErorr;
-        }
+        this.responseMessage = error.error?.message || GlobalConstants.genericErorr;
         this.snackbarService.openSnackBar(this.responseMessage);
       },
     );
