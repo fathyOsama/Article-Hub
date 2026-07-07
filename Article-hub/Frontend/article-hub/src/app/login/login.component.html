@@ -1,0 +1,41 @@
+<div class="login-page">
+  <div class="login-container">
+    <div class="logo">
+      <mat-icon>lock</mat-icon>
+    </div>
+
+    <div class="title">Article Hub</div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+      <div class="form-column">
+        <mat-form-field appearance="outline" [color]="themeService.getTheme()">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required>
+          <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+            <span *ngIf="loginForm.controls.email.errors?.['required']">This field is required.</span>
+            <span *ngIf="loginForm.controls.email.errors?.['pattern']">This field is invalid.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- password field missing! -->
+        <mat-form-field appearance="outline" [color]="themeService.getTheme()">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required>
+          <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+            <span *ngIf="loginForm.controls.password.errors?.['required']">This field is required.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <div *ngIf="responseMessamge" class="error-message">{{ responseMessamge }}</div>
+
+        <button mat-raised-button color="primary" class="login-button" type="submit" [disabled]="loginForm.invalid">
+          Login
+        </button>
+
+        <div class="home-link">
+          <span (click)="onBack()"> <span style="color: blue;cursor: pointer;">Back to Home</span></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
